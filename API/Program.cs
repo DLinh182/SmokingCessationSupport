@@ -104,12 +104,16 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Email service
-//builder.Services.AddScoped<IEmailService, SendGridEmailService>();
+builder.Services.AddScoped<IEmailService, SendGridEmailService>();
 
 builder.Services.AddScoped<FeedbackService>();
 builder.Services.AddScoped<MemberRepository>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<SmokingCessationContext>();
+builder.Services.AddScoped<AccountRepository>();
+builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<PackageMembershipRepository>();
+builder.Services.AddScoped<PackageMembershipService>();
 
 var app = builder.Build();
 
