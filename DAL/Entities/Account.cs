@@ -11,7 +11,7 @@ public partial class Account
 
     public string? Password { get; set; }
 
-    public bool? Status { get; set; }
+    public bool Status { get; set; }
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
