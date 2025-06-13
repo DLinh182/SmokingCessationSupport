@@ -108,6 +108,7 @@ builder.Services.AddScoped<IEmailService, SendGridEmailService>();
 
 builder.Services.AddScoped<FeedbackService>();
 builder.Services.AddScoped<MemberRepository>();
+builder.Services.AddScoped<MemberService>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<SmokingCessationContext>();
 builder.Services.AddScoped<AccountRepository>();
@@ -116,6 +117,7 @@ builder.Services.AddScoped<PackageMembershipRepository>();
 builder.Services.AddScoped<PackageMembershipService>();
 builder.Services.AddScoped<CommunityPostRepository>();
 builder.Services.AddScoped<CommunityPostService>();
+builder.Services.AddScoped<CoachService>();
 
 var app = builder.Build();
 
