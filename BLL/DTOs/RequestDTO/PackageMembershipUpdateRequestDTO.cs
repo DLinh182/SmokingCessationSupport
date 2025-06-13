@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace BLL.DTOs.RequestDTO
 {
-    public class PackageMembershipRequestDTO
+    public class PackageMembershipUpdateRequestDTO
     {
+        public int PackageMembershipId { get; set; }
         public string? Category { get; set; }
         public decimal? Price { get; set; }
         public string? Description { get; set; }

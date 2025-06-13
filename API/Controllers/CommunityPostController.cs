@@ -45,6 +45,7 @@ namespace API.Controllers
         }
 
         [HttpGet("search")]
+        [Authorize]
         public async Task<IActionResult> SearchPostsAsync([FromQuery] string keyword)//url: .....&keyword=abc
         {
             try

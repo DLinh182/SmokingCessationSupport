@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using BLL.DTOs.RequestDTO;
 using BLL.DTOs.ResponseDTO;
 using DAL.Repositories;
 
@@ -23,14 +24,33 @@ namespace BLL.Services
                 result.Add(new PackageMembershipResponseDTO
                 {
                     Package_membership_ID = p.PackageMembershipId,
-                    Category = p.Category ?? string.Empty,
-                    Price = p.Price ?? 0,
-                    Description = p.Description ?? string.Empty,
-                    Duration = p.Duration ?? 0,
-                    Status = (p.Price ?? 0) > 0 ? "Active" : "Inactive" // hoặc gán logic khác tùy ý
+                    Category = p.Category!,
+                    Price = p.Price,
+                    Description = p.Description!,
+                    Duration = p.Duration,
+                    Status = (p.Price) > 0 ? "Active" : "Inactive" 
                 });
             }
             return result;
         }
+
+        public async Task UpdateAsync(int id,PackageMembershipUpdateRequestDTO request)
+        {
+            var package = await _repo.GetById(id);
+            if (package == null)
+            {
+                throw new KeyNotFoundException("Package not found");
+            }
+            if (request.Category != null)
+                package.Category = request.Category;
+            if (request.Price.HasValue)
+                package.Price = request.Price.Value;
+            if (request.Description != null)
+                package.Description = request.Description;
+            if (request.Duration.HasValue)
+                package.Duration = request.Duration.Value;
+            await _repo.Update(package);
+        }
+
     }
 }

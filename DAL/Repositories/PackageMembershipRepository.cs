@@ -15,11 +15,16 @@ namespace DAL.Repositories
             return await _context.PackageMemberships.ToListAsync();
         }
 
-        public async Task<PackageMembership> Update(PackageMembership packageMembership)
+        public async Task<PackageMembership?> GetById(int id)
         {
-            _context.PackageMemberships.Update(packageMembership);
-            await _context.SaveChangesAsync();
-            return packageMembership;
+            return await _context.PackageMemberships.FindAsync(id);
         }
+
+        public async Task Update(PackageMembership package)
+        {
+            _context.PackageMemberships.Update(package);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }
