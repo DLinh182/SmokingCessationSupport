@@ -114,6 +114,8 @@ builder.Services.AddScoped<AccountRepository>();
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<PackageMembershipRepository>();
 builder.Services.AddScoped<PackageMembershipService>();
+builder.Services.AddScoped<CommunityPostRepository>();
+builder.Services.AddScoped<CommunityPostService>();
 
 var app = builder.Build();
 
