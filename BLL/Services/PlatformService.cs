@@ -39,18 +39,34 @@ namespace BLL.Services
             {
                 throw new KeyNotFoundException("Platform not found");
             }
-            if (request.News1Title != null) platform.News1Title = request.News1Title;
-            if (request.News1Content != null) platform.News1Content = request.News1Content;
-            if (request.News1Link != null) platform.News1Link = request.News1Link;
-            if (request.News2Title != null) platform.News2Title = request.News2Title;
-            if (request.News2Content != null) platform.News2Content = request.News2Content;
-            if (request.News2Link != null) platform.News2Link = request.News2Link;
-            if (request.News3Title != null) platform.News3Title = request.News3Title;
-            if (request.News3Content != null) platform.News3Content = request.News3Content;
-            if (request.News3Link != null) platform.News3Link = request.News3Link;
-            if (request.Message != null) platform.Message = request.Message;
-            if (request.About != null) platform.About = request.About;
-            if (request.Benefit != null) platform.Benefit = request.Benefit;
+            if (!string.IsNullOrWhiteSpace(request.News1Title) && request.News1Title != "string")
+                platform.News1Title = request.News1Title;
+            if (!string.IsNullOrWhiteSpace(request.News1Content) && request.News1Content != "string")
+                platform.News1Content = request.News1Content;
+            if (!string.IsNullOrWhiteSpace(request.News1Link) && request.News1Link != "string")
+                platform.News1Link = request.News1Link;
+
+            if (!string.IsNullOrWhiteSpace(request.News2Title) && request.News2Title != "string")
+                platform.News2Title = request.News2Title;
+            if (!string.IsNullOrWhiteSpace(request.News2Content) && request.News2Content != "string")
+                platform.News2Content = request.News2Content;
+            if (!string.IsNullOrWhiteSpace(request.News2Link) && request.News2Link != "string")
+                platform.News2Link = request.News2Link;
+
+            if (!string.IsNullOrWhiteSpace(request.News3Title) && request.News3Title != "string")
+                platform.News3Title = request.News3Title;
+            if (!string.IsNullOrWhiteSpace(request.News3Content) && request.News3Content != "string")
+                platform.News3Content = request.News3Content;
+            if (!string.IsNullOrWhiteSpace(request.News3Link) && request.News3Link != "string")
+                platform.News3Link = request.News3Link;
+
+            if (!string.IsNullOrWhiteSpace(request.Message) && request.Message != "string")
+                platform.Message = request.Message;
+            if (!string.IsNullOrWhiteSpace(request.About) && request.About != "string")
+                platform.About = request.About;
+            if (!string.IsNullOrWhiteSpace(request.Benefit) && request.Benefit != "string")
+                platform.Benefit = request.Benefit;
+            platform.LastUpdated = DateTime.UtcNow;
             await _repo.Update(platform);
         }
     }

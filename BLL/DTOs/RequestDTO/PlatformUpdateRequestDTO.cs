@@ -31,5 +31,7 @@ namespace BLL.DTOs.RequestDTO
         public string? About { get; set; }
 
         public string? Benefit { get; set; }
+
+        
     }
 }
