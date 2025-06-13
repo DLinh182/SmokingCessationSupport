@@ -19,5 +19,7 @@ namespace DAL.Repositories
             //_context = new SmokingCessationContext();
             return await _context.Members.ToListAsync();
         }
+
+
     }
 }

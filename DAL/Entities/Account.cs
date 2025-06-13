@@ -11,11 +11,12 @@ public partial class Account
 
     public string? Password { get; set; }
 
-    public bool? Status { get; set; }
+    public bool Status { get; set; }
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
     public virtual ICollection<CommunityPost> CommunityPosts { get; set; } = new List<CommunityPost>();
 
     public virtual User? User { get; set; }
+    //public virtual Member? Member { get; set; }
 }

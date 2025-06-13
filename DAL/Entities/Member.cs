@@ -31,7 +31,8 @@ public partial class Member
 
     public string? StatusProcess { get; set; }
 
-    public virtual User? Account { get; set; }
+    //public virtual Account? Account { get; set; } = null!;
+    public virtual User? User { get; set; }
 
     public virtual Plan? Plan { get; set; }
 
