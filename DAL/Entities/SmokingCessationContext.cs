@@ -129,7 +129,7 @@ public partial class SmokingCessationContext : DbContext
                 .HasMaxLength(15)
                 .HasColumnName("Status_Process");
 
-            entity.HasOne(d => d.Account).WithOne(p => p.Member)
+            entity.HasOne(d => d.User).WithOne(p => p.Member)
                 .HasForeignKey<Member>(d => d.AccountId)
                 .HasConstraintName("FK__Member__Account___3C69FB99");
         });

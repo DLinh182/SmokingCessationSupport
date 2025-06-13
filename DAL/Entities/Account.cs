@@ -18,4 +18,5 @@ public partial class Account
     public virtual ICollection<CommunityPost> CommunityPosts { get; set; } = new List<CommunityPost>();
 
     public virtual User? User { get; set; }
+    //public virtual Member? Member { get; set; }
 }

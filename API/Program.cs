@@ -116,6 +116,8 @@ builder.Services.AddScoped<PackageMembershipRepository>();
 builder.Services.AddScoped<PackageMembershipService>();
 builder.Services.AddScoped<CommunityPostRepository>();
 builder.Services.AddScoped<CommunityPostService>();
+builder.Services.AddScoped<RankingRepository>();
+builder.Services.AddScoped<RankingService>();
 
 var app = builder.Build();
 

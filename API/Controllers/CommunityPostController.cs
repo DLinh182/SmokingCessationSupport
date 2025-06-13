@@ -11,7 +11,7 @@ namespace API.Controllers
     [ApiController]
     public class CommunityPostController(CommunityPostService communityPostService) : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("get")]
         public async Task<IActionResult> GetAllPostsAsync()
         {
             try
@@ -25,7 +25,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("up")]
         public async Task<IActionResult> AddPostAsync([FromBody] CommunityPostRequestDTO request)
         {
             var accountIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
