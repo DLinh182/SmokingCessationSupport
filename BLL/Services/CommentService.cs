@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.DTOs.RequestDTO;
 using BLL.DTOs.ResponseDTO;
 using DAL.Repositories;
+using DAL.Entities;
 
 namespace BLL.Services
 {
@@ -28,6 +30,18 @@ namespace BLL.Services
 
             }
             return result;
+        }
+
+        public async Task AddCommentAsync(int postId, CommentCreateRequestDTO dto, int accountId)
+        {
+            var newComment = new Comment
+            {
+                PostId = postId,
+                Comment1 = dto.Comment,
+                AccountId = accountId,
+                CreateTime = DateTime.Now
+            };
+            await _repo.Add(newComment);
         }
     }
 }

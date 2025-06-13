@@ -14,6 +14,11 @@ namespace DAL.Repositories
         {
             return await _context.Comments.Include(c => c.Account!.User).ToListAsync();
         }
+        public async Task Add(Comment comment)
+        {
+            _context.Comments.Add(comment);
+            await _context.SaveChangesAsync();
+        }
 
     }
 }

@@ -8,7 +8,6 @@ namespace BLL.DTOs.RequestDTO
 {
     public class CommentCreateRequestDTO
     {
-        public int Post_ID { get; set; }
         public string Comment { get; set; }
     }
 }

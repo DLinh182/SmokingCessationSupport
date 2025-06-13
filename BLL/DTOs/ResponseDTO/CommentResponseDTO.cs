@@ -10,6 +10,6 @@ namespace BLL.DTOs.ResponseDTO
     {
         public string FullName { get; set; } = null!;
         public string Content { get; set; } = null!;
-        public DateOnly CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
     }
 }

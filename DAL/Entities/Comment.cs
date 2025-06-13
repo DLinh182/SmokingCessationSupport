@@ -13,7 +13,7 @@ public partial class Comment
 
     public string Comment1 { get; set; }
 
-    public DateOnly CreateTime { get; set; }
+    public DateTime CreateTime { get; set; }
 
     public virtual Account? Account { get; set; }
 
