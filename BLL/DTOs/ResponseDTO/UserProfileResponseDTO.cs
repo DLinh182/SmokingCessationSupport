@@ -1,5 +1,4 @@
 namespace BLL.DTOs.ResponseDTO;
-
 public class UserProfileResponseDTO
 {
     public string? FullName { get; set; }
@@ -7,4 +6,5 @@ public class UserProfileResponseDTO
     public DateOnly? Birthday { get; set; }
     public bool? Sex { get; set; }
     public string? Email { get; set; }
-} 
+}
+

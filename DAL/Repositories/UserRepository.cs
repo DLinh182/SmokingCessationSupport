@@ -28,10 +28,12 @@ namespace DAL.Repositories
             _context = new SmokingCessationContext();
             var user = await _context.Users.FirstOrDefaultAsync(u => u.AccountId == accId);
             if (user == null) return false;
-            user.FullName = fullName;
-            user.PhoneNumber = phoneNumber;
-            user.Birthday = birthday;
-            user.Sex = sex;
+
+            if (!string.IsNullOrEmpty(fullName) && fullName != "string") user.FullName = fullName;
+            if (!string.IsNullOrEmpty(phoneNumber) && phoneNumber != "string") user.PhoneNumber = phoneNumber;
+            if (birthday != null) user.Birthday = birthday;
+            if (sex != null) user.Sex = sex;
+
             await _context.SaveChangesAsync();
             return true;
         }
