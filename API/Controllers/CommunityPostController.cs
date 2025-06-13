@@ -16,7 +16,7 @@ namespace API.Controllers
         {
             try
             {
-                var response = await communityPostService.GetAllAsync();
+                var response = await communityPostService.GetAllCommunityPost();
                 return Ok(response);
             }
             catch (Exception ex)
@@ -35,7 +35,7 @@ namespace API.Controllers
             int accountId = int.Parse(accountIdClaim.Value);
             try
             {
-                await communityPostService.AddAsync(request, accountId);
+                await communityPostService.AddCommunityPost(request, accountId);
                 return Ok("Post added successfully");
             }
             catch (Exception ex)
@@ -50,7 +50,7 @@ namespace API.Controllers
         {
             try
             {
-                var response = await communityPostService.SearchByNameOrContentAsync(keyword);
+                var response = await communityPostService.SearchCommunityPostByNameOrContent(keyword);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -65,7 +65,7 @@ namespace API.Controllers
         {
             try
             {
-                await communityPostService.DeleteAsync(postId);
+                await communityPostService.DeleteCommunityPost(postId);
                 return Ok("Post deleted successfully");
             }
             catch (Exception ex)
@@ -89,7 +89,7 @@ namespace API.Controllers
                 {
                     try
                     {
-                        await communityPostService.DeleteAsync(postId);
+                        await communityPostService.DeleteCommunityPost(postId);
                         return Ok("Post deleted successfully");
                     }
                     catch (Exception ex)
