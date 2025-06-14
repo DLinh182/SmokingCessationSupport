@@ -43,5 +43,19 @@ namespace BLL.Services
             };
             await _repo.Add(newComment);
         }
+
+        public async Task<bool> DeleteCommentAsync(int commentId, int accountId, bool isAdmin)
+        {
+            var comment = await _repo.GetById(commentId);
+            if (comment == null) return false;
+
+            // Giả sử AccountId là string, nếu khác sửa lại cho phù hợp
+            if (isAdmin || comment.AccountId == accountId)
+            {
+                await _repo.Delete(commentId);
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -4,6 +4,7 @@ using BLL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace API.Controllers
 {
@@ -59,46 +60,25 @@ namespace API.Controllers
             }
         }
 
-        [HttpDelete("admin/{postId}")] //url: api/CommunityPost/{postId} --> api/CommunityPost/1
-        [Authorize(Roles = $"Admin")]
-        public async Task<IActionResult> DeletePostForAdminAsync(int postId)
-        {
-            try
-            {
-                await communityPostService.DeleteCommunityPost(postId);
-                return Ok("Post deleted successfully");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
 
         [HttpDelete("{postId}")]
-        public async Task<IActionResult> DeletePost(int postId)
+        [Authorize]
+        public async Task<IActionResult> DeletePostAsync(int postId)
         {
             var accountIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (accountIdClaim == null)
                 return Unauthorized();
 
-            int accountId = int.Parse(accountIdClaim.Value);
-            var post = await communityPostService.GetPostById(postId);
-            if(post != null)
-            {
-                if(accountId == post.AccountId)
-                {
-                    try
-                    {
-                        await communityPostService.DeleteCommunityPost(postId);
-                        return Ok("Post deleted successfully");
-                    }
-                    catch (Exception ex)
-                    {
-                        return BadRequest(ex.Message);
-                    }
-                }
-            }
-            return BadRequest("This post does not belong to you");
+            if (!int.TryParse(accountIdClaim.Value, out int accountId))
+                return Unauthorized();
+
+            bool isAdmin = User.IsInRole("Admin");
+
+            bool result = await communityPostService.DeleteCommunityPostAsync(postId, accountId, isAdmin);
+            if (result)
+                return Ok("Post and all related comments deleted successfully");
+            else
+                return NotFound("Post not found or you do not have permission to delete it");
         }
     }
 }

@@ -26,7 +26,9 @@ namespace DAL.Repositories
 
         public async Task Delete(int postId)
         {
-            var post = await _context.CommunityPosts.FindAsync(postId);
+            var post = await _context.CommunityPosts
+                .Include(p => p.Comments)
+                .FirstOrDefaultAsync(p => p.PostId == postId);
             if (post != null)
             {
                 // Remove related comments if necessary
