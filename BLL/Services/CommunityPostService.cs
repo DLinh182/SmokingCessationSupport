@@ -55,9 +55,21 @@ namespace BLL.Services
             return rs;
         }
 
-        public async Task DeleteCommunityPost(int postId)
+        //public async Task DeleteCommunityPost(int postId)
+        //{
+        //    await _repo.Delete(postId);
+        //}
+        public async Task<bool> DeleteCommunityPostAsync(int postId, int accountId, bool isAdmin)
         {
-            await _repo.Delete(postId);
+            var post = await _repo.GetById(postId);
+            if (post == null) return false;
+
+            if (isAdmin || post.AccountId == accountId)
+            {
+                await _repo.Delete(postId);
+                return true;
+            }
+            return false;
         }
 
         public async Task<CommunityPost?> GetPostById(int postId)
