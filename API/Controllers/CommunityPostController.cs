@@ -11,12 +11,12 @@ namespace API.Controllers
     [ApiController]
     public class CommunityPostController(CommunityPostService communityPostService) : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("get")]
         public async Task<IActionResult> GetAllPostsAsync()
         {
             try
             {
-                var response = await communityPostService.GetAllAsync();
+                var response = await communityPostService.GetAllCommunityPost();
                 return Ok(response);
             }
             catch (Exception ex)
@@ -25,7 +25,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("up")]
         public async Task<IActionResult> AddPostAsync([FromBody] CommunityPostRequestDTO request)
         {
             var accountIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
@@ -35,7 +35,7 @@ namespace API.Controllers
             int accountId = int.Parse(accountIdClaim.Value);
             try
             {
-                await communityPostService.AddAsync(request, accountId);
+                await communityPostService.AddCommunityPost(request, accountId);
                 return Ok("Post added successfully");
             }
             catch (Exception ex)
@@ -45,11 +45,12 @@ namespace API.Controllers
         }
 
         [HttpGet("search")]
+        [Authorize]
         public async Task<IActionResult> SearchPostsAsync([FromQuery] string keyword)//url: .....&keyword=abc
         {
             try
             {
-                var response = await communityPostService.SearchByNameOrContentAsync(keyword);
+                var response = await communityPostService.SearchCommunityPostByNameOrContent(keyword);
                 return Ok(response);
             }
             catch (Exception ex)
@@ -64,7 +65,7 @@ namespace API.Controllers
         {
             try
             {
-                await communityPostService.DeleteAsync(postId);
+                await communityPostService.DeleteCommunityPost(postId);
                 return Ok("Post deleted successfully");
             }
             catch (Exception ex)
@@ -88,7 +89,7 @@ namespace API.Controllers
                 {
                     try
                     {
-                        await communityPostService.DeleteAsync(postId);
+                        await communityPostService.DeleteCommunityPost(postId);
                         return Ok("Post deleted successfully");
                     }
                     catch (Exception ex)

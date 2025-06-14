@@ -20,6 +20,7 @@ namespace DAL.Repositories
             return await _context.Members.ToListAsync();
         }
 
+
         public async Task<Member?> GetMemberByAccountId(int accountId)
         {
             return await _context.Members.FirstOrDefaultAsync(m => m.AccountId == accountId);
@@ -36,5 +37,6 @@ namespace DAL.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+
     }
 }

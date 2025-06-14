@@ -118,6 +118,13 @@ builder.Services.AddScoped<PackageMembershipService>();
 builder.Services.AddScoped<CommunityPostRepository>();
 builder.Services.AddScoped<CommunityPostService>();
 builder.Services.AddScoped<CoachService>();
+builder.Services.AddScoped<CommentRepository>();
+builder.Services.AddScoped<CommentService>();
+builder.Services.AddScoped<RankingRepository>();
+builder.Services.AddScoped<RankingService>();
+builder.Services.AddScoped<PlatformRepository>();
+builder.Services.AddScoped<PlatformService>();
+
 
 var app = builder.Build();
 
