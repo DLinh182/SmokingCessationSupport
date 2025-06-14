@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using BLL.Services;
 using BLL.DTOs.ResponseDTO;
+using BLL.DTOs.RequestDTO;
+using System.Security.Claims;
 
 namespace API.Controllers;
 
@@ -38,4 +40,4 @@ public class MemberController : ControllerBase
         var result = await _memberService.SearchMemberAsync(keyword);
         return Ok(result);
     }
-} 
+}

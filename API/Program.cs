@@ -13,7 +13,11 @@ using DAL.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 
 // Configure DbContext
 builder.Services.AddDbContext<SmokingCessationContext>(options =>
@@ -118,6 +122,11 @@ builder.Services.AddScoped<PackageMembershipService>();
 builder.Services.AddScoped<CommunityPostRepository>();
 builder.Services.AddScoped<CommunityPostService>();
 builder.Services.AddScoped<CoachService>();
+builder.Services.AddScoped<PlanService>();
+builder.Services.AddScoped<PhaseRepository>();
+builder.Services.AddScoped<PlanRepository>();
+builder.Services.AddScoped<PlanDetailRepository>();
+builder.Services.AddScoped<PlanDetailService>();
 
 var app = builder.Build();
 
