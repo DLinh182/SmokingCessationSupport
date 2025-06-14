@@ -14,5 +14,17 @@ namespace DAL.Repositories
         {
             return await _context.PackageMemberships.ToListAsync();
         }
+
+        public async Task<PackageMembership?> GetById(int id)
+        {
+            return await _context.PackageMemberships.FindAsync(id);
+        }
+
+        public async Task Update(PackageMembership package)
+        {
+            _context.PackageMemberships.Update(package);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

@@ -12,7 +12,7 @@ namespace BLL.Services
 {
     public class CommunityPostService(CommunityPostRepository _repo)
     {
-        public async Task<List<CommunityPostResponseDTO>> GetAllAsync()
+        public async Task<List<CommunityPostResponseDTO>> GetAllCommunityPost()
         {
             var posts = await _repo.GetAll();
             List<CommunityPostResponseDTO> rs = new List<CommunityPostResponseDTO>();
@@ -28,7 +28,7 @@ namespace BLL.Services
             return rs;
         }
 
-        public async Task AddAsync(CommunityPostRequestDTO post, int accountId)
+        public async Task AddCommunityPost(CommunityPostRequestDTO post, int accountId)
         {
             var newPost = new CommunityPost
             {
@@ -39,7 +39,7 @@ namespace BLL.Services
             await _repo.Add(newPost);
         }
 
-        public async Task<List<CommunityPostResponseDTO>> SearchByNameOrContentAsync(string keyword)
+        public async Task<List<CommunityPostResponseDTO>> SearchCommunityPostByNameOrContent(string keyword)
         {
             var posts = await _repo.SearchByNameOrContent(keyword);
             List<CommunityPostResponseDTO> rs = new List<CommunityPostResponseDTO>();
@@ -55,7 +55,7 @@ namespace BLL.Services
             return rs;
         }
 
-        public async Task DeleteAsync(int postId)
+        public async Task DeleteCommunityPost(int postId)
         {
             await _repo.Delete(postId);
         }

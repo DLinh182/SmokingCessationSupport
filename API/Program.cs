@@ -122,11 +122,6 @@ builder.Services.AddScoped<PackageMembershipService>();
 builder.Services.AddScoped<CommunityPostRepository>();
 builder.Services.AddScoped<CommunityPostService>();
 builder.Services.AddScoped<CoachService>();
-builder.Services.AddScoped<PlanService>();
-builder.Services.AddScoped<PhaseRepository>();
-builder.Services.AddScoped<PlanRepository>();
-builder.Services.AddScoped<PlanDetailRepository>();
-builder.Services.AddScoped<PlanDetailService>();
 
 var app = builder.Build();
 

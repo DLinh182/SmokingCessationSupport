@@ -20,6 +20,7 @@ namespace DAL.Repositories
             return await _context.Members.ToListAsync();
         }
 
+
         public async Task<Member?> GetMemberByAccountId(int accountId)
         {
             return await _context.Members.FirstOrDefaultAsync(m => m.AccountId == accountId);
@@ -33,46 +34,6 @@ namespace DAL.Repositories
             member.FeedbackContent = content;
             member.FeedbackRating = rating;
             member.FeedbackDate = DateOnly.FromDateTime(DateTime.Now);
-            await _context.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<bool> Create(Member member)
-        {
-            _context.Members.Add(member);
-            await _context.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<bool> UpdateMemberForm(int accountId, int cigarettesPerDay, string smokingTime, int goalTime, string reason, decimal costPerCigarette, string medicalHistory, string mostSmokingTime)
-        {
-            var member = await GetMemberByAccountId(accountId);
-            if (member == null)
-            {
-                member = new Member
-                {
-                    AccountId = accountId,
-                    CigarettesPerDay = cigarettesPerDay,
-                    SmokingTime = smokingTime,
-                    GoalTime = goalTime,
-                    Reason = reason,
-                    CostPerCigarette = costPerCigarette,
-                    MedicalHistory = medicalHistory,
-                    MostSmokingTime = mostSmokingTime
-                };
-                _context.Members.Add(member);
-            }
-            else
-            {
-                member.CigarettesPerDay = cigarettesPerDay;
-                member.SmokingTime = smokingTime;
-                member.GoalTime = goalTime;
-                member.Reason = reason;
-                member.CostPerCigarette = costPerCigarette;
-                member.MedicalHistory = medicalHistory;
-                member.MostSmokingTime = mostSmokingTime;
-                _context.Members.Update(member);
-            }
             await _context.SaveChangesAsync();
             return true;
         }
