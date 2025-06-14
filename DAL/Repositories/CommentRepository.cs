@@ -20,5 +20,21 @@ namespace DAL.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task Delete(int commentId)
+        {
+            var comment = await _context.Comments.FindAsync(commentId);
+            if (comment != null)
+            {
+                _context.Comments.Remove(comment);
+                await _context.SaveChangesAsync();
+            }
+        }
+        public async Task<Comment?> GetById(int commentId)
+        {
+            return await _context.Comments
+                .Include(c => c.Account!.User)
+                .FirstOrDefaultAsync(c => c.CmtId == commentId);
+        }
+
     }
 }

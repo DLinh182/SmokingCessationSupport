@@ -42,5 +42,28 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("{commentId}")]
+        public async Task<IActionResult> DeleteCommentAsync(int commentId)
+        {
+            var accountIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (accountIdClaim == null)
+                return Unauthorized();
+
+            int accountId = int.Parse(accountIdClaim.Value);
+            bool isAdmin = User.IsInRole("Admin");
+            try
+            {
+                bool result = await _service.DeleteCommentAsync(commentId, accountId, isAdmin);
+                if (result)
+                    return Ok("Comment deleted successfully");
+                else
+                    return NotFound("Comment not found or you do not have permission to delete it");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
