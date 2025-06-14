@@ -22,5 +22,20 @@ namespace DAL.Repositories
                 .Include(u => u.Member)
                 .FirstOrDefaultAsync(u => u.AccountId == accId);
         }
+
+        public async Task<bool> UpdateUserProfile(int accId, string? fullName, string? phoneNumber, DateOnly? birthday, bool? sex)
+        {
+            _context = new SmokingCessationContext();
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.AccountId == accId);
+            if (user == null) return false;
+
+            if (!string.IsNullOrEmpty(fullName) && fullName != "string") user.FullName = fullName;
+            if (!string.IsNullOrEmpty(phoneNumber) && phoneNumber != "string") user.PhoneNumber = phoneNumber;
+            if (birthday != null) user.Birthday = birthday;
+            if (sex != null) user.Sex = sex;
+
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

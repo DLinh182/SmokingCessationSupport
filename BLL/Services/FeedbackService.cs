@@ -1,5 +1,4 @@
-﻿
-using BLL.DTOs.ResponseDTO;
+﻿using BLL.DTOs.ResponseDTO;
 using DAL.Entities;
 using DAL.Repositories;
 
@@ -45,6 +44,23 @@ namespace BLL.Services
                 }
             }
             return feedbackList;
+        }
+
+        public async Task<bool> SubmitOrUpdateFeedback(int accountId, string? content, int? rating)
+        {
+            if (rating is < 1 or > 5) throw new Exception("Rating phải từ 1 đến 5");
+            return await _memberRepo.UpdateFeedback(accountId, content, rating);
+        }
+
+        public async Task<List<AllFeedbackGetResponse>> FilterFeedbackByRating(int rating)
+        {
+            var all = await GetAllFeedback();
+            return all.Where(f => f.Feedback_rating == rating).ToList();
+        }
+
+        public async Task<DAL.Entities.Member?> GetMemberByAccountId(int accountId)
+        {
+            return await _memberRepo.GetMemberByAccountId(accountId);
         }
     }
 }
